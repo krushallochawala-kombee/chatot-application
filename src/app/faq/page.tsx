@@ -9,7 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChevronDown, Filter } from "lucide-react";
+import { ChevronDown, Filter, Plus, Upload } from "lucide-react";
+import Link from "next/link";
 
 const faqs = [
   {
@@ -67,7 +68,18 @@ export default function FaqPage() {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">FAQ Management</h1>
-        <Button>+ Add New FAQ</Button>
+        <div className="flex gap-2">
+            <Button>
+                <Plus className="mr-2 h-4 w-4" />
+                Add New FAQ
+            </Button>
+            <Button variant="outline" asChild>
+                <Link href="/faq/bulk-upload">
+                    <Upload className="mr-2 h-4 w-4" />
+                    Bulk Upload
+                </Link>
+            </Button>
+        </div>
       </div>
 
       <Tabs defaultValue="english" className="mb-6">

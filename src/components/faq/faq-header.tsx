@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Bell, Search, Settings, HelpCircle } from "lucide-react";
+import { Bell, Search, Settings, HelpCircle, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,19 +18,24 @@ import {
 export function FaqHeader() {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 sm:px-6">
-      <div className="relative w-full">
-        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input
-          type="search"
-          placeholder="Search..."
-          className="w-full pl-8"
-        />
+      <div className="flex-1">
+        <h1 className="text-xl font-semibold">Company Name</h1>
+      </div>
+      <div className="flex items-center gap-6 text-sm font-medium">
+        <Link href="/dashboard" className="text-muted-foreground hover:text-foreground">
+          Dashboard
+        </Link>
+        <Link href="/faq" className="text-foreground font-semibold">
+          FAQ Management
+        </Link>
+        <Link href="#" className="text-muted-foreground hover:text-foreground">
+          Settings
+        </Link>
+        <Link href="#" className="text-muted-foreground hover:text-foreground">
+          Help
+        </Link>
       </div>
       <div className="flex items-center gap-4 ml-auto">
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <Bell className="h-5 w-5" />
-          <span className="sr-only">Toggle notifications</span>
-        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
@@ -51,7 +56,10 @@ export function FaqHeader() {
               <span>Support</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Logout</span>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
