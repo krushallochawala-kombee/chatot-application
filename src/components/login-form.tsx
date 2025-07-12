@@ -138,7 +138,7 @@ export function LoginForm() {
             </div>
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-[#4F39D5] to-[#D5398B] text-primary-foreground hover:opacity-90 transition-all duration-300"
+              className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300"
             >
               Sign In
             </Button>
@@ -147,7 +147,7 @@ export function LoginForm() {
         <div className="mt-6 text-center text-sm">
           Don&apos;t have an account?{" "}
           <Link
-            href="#"
+            href="/signup"
             className="font-medium text-primary hover:underline"
           >
             Sign up
