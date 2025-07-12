@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Eye, EyeOff, Monitor } from "lucide-react"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod"; 
+import { Eye, EyeOff, Monitor } from "lucide-react";
+import { useForm } from "react-hook-form";    
+import * as z from "zod";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -24,20 +24,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useToast } from "@/hooks/use-toast"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
   password: z.string().min(1, { message: "Password is required." }),
   rememberMe: z.boolean().default(false).optional(),
-})
+});
 
 export function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false)
-  const router = useRouter()
-  const { toast } = useToast()
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,40 +46,43 @@ export function LoginForm() {
       password: "",
       rememberMe: false,
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Dummy login logic
-    if (values.email === "admin@example.com" && values.password === "Password123!") {
+    if (
+      values.email === "admin@example.com" &&
+      values.password === "Password123!"
+    ) {
       toast({
         title: "Admin Login Successful",
         description: "Redirecting to dashboard...",
-      })
-      router.push("/dashboard")
-    } else if (values.email === "user@example.com" && values.password === "Password123!") {
-        toast({
-            title: "Login Successful",
-            description: "Redirecting to conversations...",
-        })
-        router.push("/conversations")
-    }
-    else {
+      });
+      router.push("/dashboard");
+    } else if (
+      values.email === "user@example.com" &&
+      values.password === "Password123!"
+    ) {
+      toast({
+        title: "Login Successful",
+        description: "Redirecting to conversations...",
+      });
+      router.push("/conversations");
+    } else {
       toast({
         variant: "destructive",
         title: "Login Failed",
         description: "Invalid email or password.",
-      })
+      });
     }
-    console.log(values)
+    console.log(values);
   }
 
   return (
     <Card className="w-full max-w-md mx-auto shadow-lg">
       <CardHeader className="text-center space-y-4">
         <Monitor className="h-12 w-12 mx-auto text-primary" />
-        <CardTitle className="text-3xl font-bold">
-          SysMonitor
-        </CardTitle>
+        <CardTitle className="text-3xl font-bold">SysMonitor</CardTitle>
         <CardDescription>
           Enter your credentials to access your account
         </CardDescription>
@@ -179,5 +182,5 @@ export function LoginForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
