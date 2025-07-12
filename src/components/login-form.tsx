@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Eye, EyeOff } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -25,6 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useToast } from "@/hooks/use-toast"
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -34,6 +36,8 @@ const formSchema = z.object({
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,16 +49,28 @@ export function LoginForm() {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    // Dummy login logic
+    if (values.email === "admin@example.com" && values.password === "Password123!") {
+      toast({
+        title: "Login Successful",
+        description: "Redirecting to dashboard...",
+      })
+      router.push("/dashboard")
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Login Failed",
+        description: "Invalid email or password.",
+      })
+    }
     console.log(values)
-    // Here you would typically handle the login logic,
-    // e.g., call an API endpoint.
   }
 
   return (
     <Card className="w-full max-w-md mx-auto shadow-lg">
       <CardHeader className="text-center">
         <CardTitle className="text-3xl font-bold font-headline">
-          LoginFlow
+          InsightAI
         </CardTitle>
         <CardDescription>
           Enter your credentials to access your account
@@ -70,7 +86,7 @@ export function LoginForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="name@example.com" {...field} />
+                    <Input placeholder="admin@example.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -138,7 +154,7 @@ export function LoginForm() {
             </div>
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Sign In
             </Button>
