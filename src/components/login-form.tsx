@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff, Monitor } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -68,9 +68,10 @@ export function LoginForm() {
 
   return (
     <Card className="w-full max-w-md mx-auto shadow-lg">
-      <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold font-headline">
-          InsightAI
+      <CardHeader className="text-center space-y-4">
+        <Monitor className="h-12 w-12 mx-auto text-primary" />
+        <CardTitle className="text-3xl font-bold">
+          SysMonitor
         </CardTitle>
         <CardDescription>
           Enter your credentials to access your account
