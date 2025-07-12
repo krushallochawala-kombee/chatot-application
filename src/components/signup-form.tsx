@@ -63,10 +63,12 @@ export function SignUpForm() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
-      <div className="hidden md:flex flex-col items-center justify-center bg-gradient-to-br from-primary to-accent text-white p-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-radial opacity-50"></div>
-         <div className="relative z-10 text-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+      <div className="hidden md:flex flex-col items-center justify-center bg-gradient-to-br from-[#2E3192] to-[#4F46E5] text-white p-12 relative overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-white/10 rounded-lg -rotate-12 opacity-50 blur-sm"></div>
+        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-white/10 rounded-lg rotate-12 opacity-50 blur-sm"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full opacity-50 blur-sm"></div>
+        <div className="relative z-10 text-center">
           <h1 className="text-4xl font-bold mb-4">Admin Dashboard</h1>
           <p className="text-lg text-primary-foreground/80">Manage your application with powerful admin tools</p>
         </div>
@@ -75,7 +77,7 @@ export function SignUpForm() {
         <div className="w-full max-w-md mx-auto">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-foreground">Create Admin Account</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mt-2"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-600 mt-2"></div>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -137,10 +139,10 @@ export function SignUpForm() {
                       </div>
                     </FormControl>
                      <div className="text-sm mt-2 space-y-1">
-                      <p className="font-medium text-foreground">Password requirements:</p>
-                      <ul className="text-muted-foreground">
+                      <p className="font-medium text-muted-foreground">Password requirements:</p>
+                      <ul className="text-muted-foreground space-y-1">
                         {passwordRequirements.map((req, index) => {
-                          const met = req.regex.test(passwordValue);
+                          const met = req.regex.test(passwordValue || "");
                           return (
                             <li key={index} className="flex items-center gap-2">
                               {met ? <CheckCircle className="h-4 w-4 text-green-500" /> : <Circle className="h-4 w-4 text-muted-foreground/50" />}
@@ -170,8 +172,8 @@ export function SignUpForm() {
                           <FormControl>
                              <RadioGroupItem value="admin" className="sr-only" />
                           </FormControl>
-                          <FormLabel className={cn("flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground cursor-pointer", field.value === 'admin' && 'border-primary')}>
-                            <User className="mb-3 h-6 w-6" />
+                          <FormLabel className={cn("flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground cursor-pointer", field.value === 'admin' && 'border-primary bg-primary/5')}>
+                            <User className="mb-3 h-6 w-6 text-primary" />
                             Admin
                             <span className="text-xs text-muted-foreground font-normal mt-1">Full system access</span>
                           </FormLabel>
@@ -180,7 +182,7 @@ export function SignUpForm() {
                            <FormControl>
                              <RadioGroupItem value="support" className="sr-only" />
                           </FormControl>
-                          <FormLabel className={cn("flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground cursor-pointer", field.value === 'support' && 'border-primary')}>
+                          <FormLabel className={cn("flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground cursor-pointer", field.value === 'support' && 'border-primary bg-primary/5')}>
                              <Headphones className="mb-3 h-6 w-6" />
                              Support Staff
                              <span className="text-xs text-muted-foreground font-normal mt-1">Limited access</span>
@@ -192,12 +194,12 @@ export function SignUpForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 text-base py-6">
+              <Button type="submit" className="w-full bg-gradient-to-r from-primary to-purple-600 text-primary-foreground hover:opacity-90 transition-all duration-300 text-base py-6">
                 Create Account
               </Button>
             </form>
           </Form>
-          <div className="mt-6 text-center text-sm">
+          <div className="mt-8 text-center text-sm">
             <Link href="/" className="font-medium text-primary hover:underline">
               Back to Login
             </Link>
