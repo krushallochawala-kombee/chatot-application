@@ -65,13 +65,18 @@ export function LoginForm() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 w-full">
-        <div className="hidden md:flex flex-col items-center justify-center bg-gradient-to-br from-primary to-purple-600 text-primary-foreground p-12 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-radial from-white/10 to-transparent opacity-50 rounded-full w-96 h-96 -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="relative z-10 space-y-4">
-                <div className="bg-white/90 p-4 rounded-xl shadow-lg inline-block">
-                    <ShieldCheck className="h-16 w-16 text-primary" />
+        <div className="hidden md:flex flex-col items-center justify-center bg-[#4f46e5] text-primary-foreground p-12 text-center relative overflow-hidden">
+             <div className="absolute -top-1/4 -left-1/4 w-96 h-96 bg-gradient-radial from-white/20 to-transparent rounded-full opacity-50 blur-2xl"></div>
+            <div className="absolute -bottom-1/4 -right-1/4 w-96 h-96 bg-gradient-radial from-purple-500/20 to-transparent rounded-full opacity-50 blur-2xl"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-gradient-radial from-purple-600/30 to-transparent rounded-full opacity-50 blur-3xl"></div>
+            
+            <div className="relative z-10 flex flex-col items-center gap-6">
+                <div className="bg-white/90 p-4 rounded-xl shadow-lg inline-block backdrop-blur-sm">
+                    <div className="w-24 h-16 bg-white rounded-lg flex items-center justify-center">
+                        <span className="text-primary font-bold text-xl">Logo</span>
+                    </div>
                 </div>
-                <h2 className="text-2xl font-bold">Secure access to your account</h2>
+                <h2 className="text-xl font-semibold text-white/90">Secure access to your account</h2>
             </div>
         </div>
         <div className="flex items-center justify-center p-8 sm:p-12">
