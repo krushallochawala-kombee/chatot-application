@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Bell,
   Search,
@@ -8,6 +9,7 @@ import {
   HelpCircle,
   PanelLeft,
   Monitor,
+  LogOut,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -20,22 +22,50 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useToast } from "@/hooks/use-toast";
+import { authApi } from "@/services/api";
 
 const navItems = [
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "#", label: "Services" },
-    { href: "#", label: "Webhooks" },
-    { href: "#", label: "Audit Logs" },
-    { href: "#", label: "Settings" },
-    { href: "#", label: "Support" },
-  ];
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "#", label: "Services" },
+  { href: "#", label: "Webhooks" },
+  { href: "#", label: "Audit Logs" },
+  { href: "#", label: "Settings" },
+  { href: "#", label: "Support" },
+];
 
 export function SysMonitorHeader() {
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const handleLogout = async () => {
+    try {
+      // Call the logout API
+      await authApi.logout();
+
+      toast({
+        title: "Logged out successfully",
+        description: "You have been logged out of your account.",
+      });
+
+      // Redirect to login page
+      router.push("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+
+      // Even if the API call fails, still clear local storage and redirect
+      localStorage.removeItem("authToken");
+
+      toast({
+        title: "Logged out",
+        description: "You have been logged out of your account.",
+      });
+
+      router.push("/");
+    }
+  };
+
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-card px-4 sm:px-6">
       <Sheet>
@@ -54,10 +84,14 @@ export function SysMonitorHeader() {
               <Monitor className="h-5 w-5 transition-all group-hover:scale-110" />
               <span className="sr-only">SysMonitor</span>
             </Link>
-            {navItems.map(item => (
-                <Link key={item.label} href={item.href} className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
-                    {item.label}
-                </Link>
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+              >
+                {item.label}
+              </Link>
             ))}
           </nav>
         </SheetContent>
@@ -81,7 +115,7 @@ export function SysMonitorHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar className="h-8 w-8">
-                 <AvatarFallback>AU</AvatarFallback>
+                <AvatarFallback>AU</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
@@ -97,7 +131,10 @@ export function SysMonitorHeader() {
               <span>Support</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Logout</span>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
