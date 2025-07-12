@@ -52,11 +52,18 @@ export function LoginForm() {
     // Dummy login logic
     if (values.email === "admin@example.com" && values.password === "Password123!") {
       toast({
-        title: "Login Successful",
+        title: "Admin Login Successful",
         description: "Redirecting to dashboard...",
       })
       router.push("/dashboard")
-    } else {
+    } else if (values.email === "user@example.com" && values.password === "Password123!") {
+        toast({
+            title: "Login Successful",
+            description: "Redirecting to conversations...",
+        })
+        router.push("/conversations")
+    }
+    else {
       toast({
         variant: "destructive",
         title: "Login Failed",
