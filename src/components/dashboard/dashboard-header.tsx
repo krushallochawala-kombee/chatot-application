@@ -21,16 +21,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/dashboard", label: "Dashboard" },
+  { href: "/conversations", label: "Conversations" },
   { href: "#", label: "Analytics" },
-  { href: "#", label: "Messages" },
   { href: "/faq", label: "FAQs" },
   { href: "#", label: "Settings" },
 ];
 
 export function DashboardHeader() {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 sm:px-6">
       <Link href="#" className="text-xl font-bold text-primary mr-4">
@@ -41,11 +45,12 @@ export function DashboardHeader() {
           <Link
             key={link.label}
             href={link.href}
-            className={`transition-colors hover:text-foreground ${
-              link.href === "/dashboard"
+            className={cn(
+              "transition-colors hover:text-foreground",
+              pathname === link.href
                 ? "text-foreground"
                 : "text-muted-foreground"
-            }`}
+            )}
           >
             {link.label}
           </Link>

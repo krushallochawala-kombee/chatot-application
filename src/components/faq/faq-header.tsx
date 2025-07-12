@@ -19,20 +19,22 @@ export function FaqHeader() {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 sm:px-6">
       <div className="flex-1">
-        <h1 className="text-xl font-semibold">Company Name</h1>
+         <Link href="/dashboard" className="text-xl font-bold text-primary mr-4">
+            InsightAI
+        </Link>
       </div>
       <div className="flex items-center gap-6 text-sm font-medium">
         <Link href="/dashboard" className="text-muted-foreground hover:text-foreground">
           Dashboard
+        </Link>
+        <Link href="/conversations" className="text-muted-foreground hover:text-foreground">
+          Conversations
         </Link>
         <Link href="/faq" className="text-foreground font-semibold">
           FAQ Management
         </Link>
         <Link href="#" className="text-muted-foreground hover:text-foreground">
           Settings
-        </Link>
-        <Link href="#" className="text-muted-foreground hover:text-foreground">
-          Help
         </Link>
       </div>
       <div className="flex items-center gap-4 ml-auto">
