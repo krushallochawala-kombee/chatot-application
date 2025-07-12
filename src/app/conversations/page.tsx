@@ -9,7 +9,7 @@ export default function ConversationsPage() {
       <div className="hidden lg:flex flex-col border-l border-r border-border h-full">
         <ChatTranscript />
       </div>
-      <div className="hidden xl:flex flex-col border-border h-full">
+      <div className="hidden xl:flex flex-col border-border h-full bg-muted/50">
         <ConversationAnalysis />
       </div>
     </div>
